@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/node
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 import figlet from 'figlet';
