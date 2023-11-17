@@ -83,11 +83,45 @@ function presentTemplateChoices() {
               });
 
               console.log(`
-                ${chalk.bgBlue('CONGRATS')}
+                ${chalk.bgBlue('CONGRATS! Build something creative!')}
               `);
             }, 2000); // Replace this with your actual template generation logic
           });
-      } else {
+      } else if (projectChoice === 'Sveltekit-Tailwind'){
+        // Ask the user to choose between Inertia and TypeScript for Laravel-React or Laravel-Vue
+        const variantQuestion = [
+          {
+            name: 'variant-choice',
+            type: 'list',
+            message: `Choose the variant for ${projectChoice}:`,
+            choices: ['Javascript', 'Typescript'],
+          },
+        ];
+
+        inquirer.prompt(variantQuestion)
+          .then(({ 'variant-choice': variantChoice }) => {
+            const templateVariantPath = `${templatePath}/${variantChoice}`;
+            const spinner = ora(`Generating ${projectChoice} template...`).start();
+
+            // Simulate some asynchronous work (replace with actual template generation)
+            setTimeout(() => {
+              // Complete the template generation
+              fs.mkdirSync(`${CURR_DIR}/${projectName}`);
+              createDirectoryContents(templateVariantPath, projectName);
+
+              // Stop the spinner
+              spinner.stopAndPersist({
+                text: `${projectChoice} template generated successfully!`,
+                symbol: chalk.green('✔'),
+              });
+
+              console.log(`
+                ${chalk.bgBlue('CONGRATS! Build something creative!')}
+              `);
+            }, 2000); // Replace this with your actual template generation logic
+          });
+      }
+      else {
         const spinner = ora(`Generating ${projectChoice} template...`).start();
 
         // Simulate some asynchronous work (replace with actual template generation)
@@ -103,7 +137,7 @@ function presentTemplateChoices() {
           });
 
           console.log(`
-            ${chalk.bgBlue('CONGRATS: Build something creative!')}
+            ${chalk.bgBlue('CONGRATS! Build something creative!')}
           `);
         }, 2000);
       }
